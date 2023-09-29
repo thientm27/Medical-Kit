@@ -5,12 +5,6 @@
 import FlutterMacOS
 import Foundation
 
-
-import path_provider_foundation
-
-func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
-  PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
-
 import audioplayers_darwin
 import awesome_notifications
 import package_info_plus
@@ -31,5 +25,4 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   WakelockPlusMacosPlugin.register(with: registry.registrar(forPlugin: "WakelockPlusMacosPlugin"))
   ZegoExpressEnginePlugin.register(with: registry.registrar(forPlugin: "ZegoExpressEnginePlugin"))
   ZegoZimPlugin.register(with: registry.registrar(forPlugin: "ZegoZimPlugin"))
->>>>>>> dothanhbo-splash
 }
