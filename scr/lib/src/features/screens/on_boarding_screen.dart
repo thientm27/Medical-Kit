@@ -5,6 +5,7 @@ import 'package:scr/src/constants/images.dart';
 import 'package:scr/src/constants/texts.dart';
 import 'package:scr/src/features/models/models_on_boarding.dart';
 import 'package:scr/src/features/screens/on_boarding_page_widget.dart';
+import 'package:scr/src/features/screens/call.dart';
 
 class OnBoardingScreen extends StatelessWidget{
   const OnBoardingScreen({Key? key,
@@ -68,7 +69,9 @@ class OnBoardingScreen extends StatelessWidget{
               Positioned(
                 bottom: 0.0,
                 child: OutlinedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => CallPage(callID : "1")));
+                  },
                   style: ElevatedButton.styleFrom(
                     side: const BorderSide(color: Colors.black26),
                     shape: const CircleBorder(),
