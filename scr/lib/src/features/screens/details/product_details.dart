@@ -8,6 +8,7 @@ import 'package:ionicons/ionicons.dart';
 import '../../../controller/product_controller.dart';
 import '../../models/sm_product_model.dart';
 import 'package:scr/src/constants/colors.dart';
+import 'package:scr/src/features/screens/call.dart';
 
 class ProductDetailsView extends StatelessWidget {
   ProductDetailsView({Key? key}) : super(key: key);
@@ -36,9 +37,11 @@ class ProductDetailsView extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => CallPage(callID : "1")));
+            },
             icon: const Icon(
-              Ionicons.bag_outline,
+              Ionicons.call,
               color: Colors.black,
             ),
           ),

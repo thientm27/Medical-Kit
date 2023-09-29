@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:scr/src/features/screens/login/login_screen.dart';
 import 'src/features/screens/on_boarding_screen.dart';
 
 void main() 
@@ -14,7 +13,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       themeMode: ThemeMode.system,
       routes: {
-        '/': (context) => const LoginScreen(), // Map the route to your default page widget
+        '/': (context) => const OnBoardingScreen(), // Map the route to your default page widget
         // Define other routes here if needed
       },
     );

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:scr/src/constants/images.dart';
 import 'package:scr/src/constants/sizes.dart';
 import 'package:scr/src/constants/texts.dart';
+import 'package:scr/src/constants/colors.dart';
+import 'package:scr/src/features/screens/details/product_details.dart';
 
 bool _signInActive = true;
 
@@ -21,11 +23,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     mediaSize = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.red,
+        backgroundColor: tOnBoardingPage1Color,
         body: Stack(
           children: [
             Positioned(top: 30, child: _buildTop()),
@@ -41,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
       width: mediaSize.width,
       child: const Image(
         image: AssetImage(Logo),
-        height: 80,
+        height: 150,
       ),
     );
   }
@@ -76,6 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.black,
                   fontSize: 30,
                   fontWeight: FontWeight.w500),
+                  textAlign: TextAlign.center,
             ),
             const SizedBox(
               height: tFormHeight,
@@ -95,13 +97,17 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductDetailsView()));
+                  },
                   child: Text(tLogin.toUpperCase()),
                 )),
             const SizedBox(
+              width: double.infinity,
               height: tFormHeight - 10,
             ),
-            Column(
+            Center(
+            child : Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
@@ -109,34 +115,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: TextStyle(
                     fontSize: 15.0,
                     fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(
-                  height: tFormHeight - 10,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton.icon(
-                    onPressed: () {},
-                    icon: const Image(
-                      image: AssetImage(GoogleLogo),
-                      width: 20.0,
-                    ),
-                    label: const Text(tSignInWithGoogle),
-                  ),
-                ),
-                const SizedBox(
-                  height: tFormHeight - 20,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton.icon(
-                    onPressed: () {},
-                    icon: const Image(
-                      image: AssetImage(FacebookLogo),
-                      width: 20.0,
-                    ),
-                    label: const Text(tSignInWithFacebook),
                   ),
                 ),
                 const SizedBox(
@@ -158,12 +136,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   _signInActive = false;
                                 });
                               }),
-                      ],
+                      ]
                     ),
                   ),
                 ),
               ],
-            ),
+            ),)
           ],
         ),
       ),
@@ -202,7 +180,8 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {        
+                  },
                   child: Text(tSignUp.toUpperCase()),
                 )),
             const SizedBox(
@@ -216,7 +195,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: tFormHeight - 10,
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                  },
                   child: Text.rich(
                     TextSpan(
                       text: tHaveAccount,
@@ -227,9 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: const TextStyle(color: Colors.blue),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                setState(() {
-                                  _signInActive = true;
-                                });
+                                setState(() {_signInActive = true;});
                               }
                         ),
                       ],
