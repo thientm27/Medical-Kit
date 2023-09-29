@@ -19,7 +19,7 @@ class OnBoardingPageWidget extends StatelessWidget{
         children: [
           Image(
             image: AssetImage(model.logo,),
-            height: model.height * 0.25,
+            height: model.height * 0.20,
           ),
           Column(
             children: [
@@ -32,7 +32,7 @@ class OnBoardingPageWidget extends StatelessWidget{
                   ),
                 textAlign: TextAlign.center,
                 ),
-            const SizedBox(height: 80.0,),
+            const SizedBox(height: 50.0,),
             Image(image: AssetImage(model.image), height: model.height * 0.35),
             Text(
               model.subTitle,
