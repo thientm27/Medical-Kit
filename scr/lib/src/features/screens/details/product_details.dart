@@ -7,7 +7,7 @@ import 'package:ionicons/ionicons.dart';
 
 import '../../../controller/product_controller.dart';
 import '../../models/sm_product_model.dart';
-import '../../utils/color.dart';
+import 'package:scr/src/constants/colors.dart';
 
 class ProductDetailsView extends StatelessWidget {
   ProductDetailsView({Key? key}) : super(key: key);
@@ -23,9 +23,9 @@ class ProductDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.kBgColor,
+      backgroundColor: kBgColor,
       appBar: AppBar(
-        backgroundColor: AppColors.kBgColor,
+        backgroundColor: kBgColor,
         elevation: 0,
         leading: IconButton(
           onPressed: () {},
@@ -121,7 +121,7 @@ class ProductDetailsView extends StatelessWidget {
                               width: 110,
                               height: 110,
                               decoration: BoxDecoration(
-                                color: AppColors.kSmProductBgColor,
+                                color: kSmProductBgColor,
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Center(
@@ -145,7 +145,7 @@ class ProductDetailsView extends StatelessWidget {
                     width: 50,
                     height: 5,
                     decoration: BoxDecoration(
-                      color: AppColors.kGreyColor,
+                      color: kGreyColor,
                       borderRadius: BorderRadius.circular(50),
                     ),
                   ),
@@ -168,7 +168,7 @@ class ProductDetailsView extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: AppColors.kGreyColor),
+                border: Border.all(color: kGreyColor),
               ),
               child: Icon(
                 Ionicons.heart_outline,

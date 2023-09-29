@@ -296,14 +296,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.0"
-  hexcolor:
-    dependency: "direct main"
-    description:
-      name: hexcolor
-      sha256: e572c3346f4b26422a281dc4c10f83022131f56f7364837671b50f53c7adc5e7
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.7"
   http:
     dependency: transitive
     description:
