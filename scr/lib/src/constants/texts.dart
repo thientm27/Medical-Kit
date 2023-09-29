@@ -9,3 +9,16 @@ const String counter1 = "1/4";
 const String counter2 = "2/4";
 const String counter3 = "3/4";
 const String counter4 = "4/4";
+
+//Login & sign up
+const String tEmail = "Email";
+const String tPassword = "Password";
+const String tConfirmPassword = "Confirm Password";
+const String tRememberMe = "Remember me?";
+const String tForgotPassword = "Forgot password?";
+const String tLogin = "Sign in";
+const String tSignUp = "Sign up";
+const String tHaveAccount = "You had an account?";
+const String tDontHaveAccount = "Don't have an account?";
+const String tSignInWithGoogle = "Sign in with Google";
+const String tSignInWithFacebook = "Sign in with Facebook";
