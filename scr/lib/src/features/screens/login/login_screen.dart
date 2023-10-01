@@ -4,7 +4,7 @@ import 'package:scr/src/constants/images.dart';
 import 'package:scr/src/constants/sizes.dart';
 import 'package:scr/src/constants/texts.dart';
 import 'package:scr/src/constants/colors.dart';
-import 'package:scr/src/features/screens/details/product_details.dart';
+import 'package:scr/src/features/screens/mainpage/main_page.dart';
 
 bool _signInActive = true;
 
@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return SizedBox(
       width: mediaSize.width,
       child: const Image(
-        image: AssetImage(Logo),
+        image: AssetImage(logo),
         height: 150,
       ),
     );
@@ -98,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductDetailsView()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>const HomePage()));
                   },
                   child: Text(tLogin.toUpperCase()),
                 )),

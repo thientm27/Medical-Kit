@@ -17,8 +17,8 @@ class OnBoardingScreen extends StatelessWidget{
     final pages = [
       OnBoardingPageWidget(
         model: OnBoardingModel(
-        logo: Logo,
-        image: Splash1,
+        logo: logo,
+        image: splash1,
         title: mainTitle,
         subTitle: subTitle1,
         counterText: counter1,
@@ -28,8 +28,8 @@ class OnBoardingScreen extends StatelessWidget{
 
       OnBoardingPageWidget(
         model: OnBoardingModel(
-        logo: Logo,
-        image: Splash2,
+        logo: logo,
+        image: splash2,
         title: mainTitle,
         subTitle: subTitle2,
         counterText: counter2,
@@ -39,8 +39,8 @@ class OnBoardingScreen extends StatelessWidget{
 
       OnBoardingPageWidget(
         model: OnBoardingModel(
-        logo: Logo,
-        image: Splash3,
+        logo: logo,
+        image: splash3,
         title: mainTitle,
         subTitle: subTitle3,
         counterText: counter3,
@@ -50,8 +50,8 @@ class OnBoardingScreen extends StatelessWidget{
 
       OnBoardingPageWidget(
         model: OnBoardingModel(
-        logo: Logo,
-        image: Splash4,
+        logo: logo,
+        image: splash4,
         title: mainTitle,
         subTitle: subTitle4,
         counterText: counter4,
@@ -70,19 +70,21 @@ class OnBoardingScreen extends StatelessWidget{
                 bottom: 0.0,
                 child: OutlinedButton(
                   onPressed: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>const LoginScreen()));
                   },
                   style: ElevatedButton.styleFrom(
                     side: const BorderSide(color: Colors.black26),
                     shape: const CircleBorder(),
                     padding: const EdgeInsets.all(20),
-                    onPrimary: Colors.white,
                   ),
                   child: Container(
                     padding: const EdgeInsets.all(20),
                     decoration: const BoxDecoration(
                       color: Color(0xffcb172f), shape: BoxShape.circle),
-                      child: const Icon(Icons.arrow_forward_ios),
+                      child: const Icon(
+                        Icons.arrow_forward_ios,
+                        color: tOnBoardingPage1Color,
+                      ),
                     ),
                   ),
                 )
