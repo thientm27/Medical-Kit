@@ -7,7 +7,7 @@ import 'package:scr/src/features/screens/medicines/using_medicines_page.dart';
 class MyBox extends StatefulWidget {
   const MyBox({Key? key}) : super(key: key);
  @override
-  _MyBoxState createState() => _MyBoxState();
+  State<MyBox> createState() => _MyBoxState();
 }
 
 class _MyBoxState extends State<MyBox>{

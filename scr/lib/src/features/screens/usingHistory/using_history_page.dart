@@ -8,7 +8,7 @@ import 'package:date_only_field/date_only_field.dart';
 class UsingHistoryPage extends StatefulWidget {
   const UsingHistoryPage({Key? key}): super(key: key);
 @override
-  _UsingHistoryPage createState() => _UsingHistoryPage();
+  State<UsingHistoryPage> createState() => _UsingHistoryPage();
 }
 
 class _UsingHistoryPage extends State<UsingHistoryPage>{

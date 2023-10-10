@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:scr/src/features/models/model_using_history.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert'; // Import this for jsonEncode
 import 'package:fluttertoast/fluttertoast.dart';
-Future addUsingHistory(String productId, String medicineName, UsingHistory usingHistory) async 
+import 'package:scr/src/features/screens/mainpage/main_page.dart';
+
+Future addUsingHistory(BuildContext context, productId, String medicineName, UsingHistory usingHistory) async 
 {
   final uri = Uri.parse('http://10.0.2.2:5102/api/UsingHistory?id=$productId&medicineName=$medicineName');
   final headers = {'Content-Type': 'application/json'};
@@ -17,9 +20,13 @@ final response = await http.put(uri, headers: headers, body: jsonEncode(historyJ
     toastLength: Toast.LENGTH_SHORT,
     gravity: ToastGravity.CENTER
   );
+   if (!context.mounted) return;
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => const HomePage()),
+    );
     } else {
       Fluttertoast.showToast(
-    msg: "An error occurred with code ${response.statusCode}",
+    msg: "An error occurred with code ${response. statusCode}",
     toastLength: Toast.LENGTH_SHORT,
     gravity: ToastGravity.CENTER
   );

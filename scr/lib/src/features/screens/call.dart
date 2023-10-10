@@ -7,7 +7,7 @@ class CallPage extends StatefulWidget {
   final String callID;
 
   @override
-  _CallPageState createState() => _CallPageState();
+  State<CallPage> createState() => _CallPageState();
 }
 
 class _CallPageState extends State<CallPage>{

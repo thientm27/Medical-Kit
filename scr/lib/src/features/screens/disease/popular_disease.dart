@@ -7,7 +7,7 @@ import 'package:scr/src/features/controllers/disease_controller.dart';
 class PopularDisease extends StatefulWidget {
   const PopularDisease({Key? key}) : super(key: key);
  @override
-  _PopularDiseaseState createState() => _PopularDiseaseState();
+  State<PopularDisease> createState() => _PopularDiseaseState();
 }
 
 class _PopularDiseaseState extends State<PopularDisease> {

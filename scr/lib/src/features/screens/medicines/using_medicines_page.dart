@@ -14,7 +14,7 @@ class UsingMedicinesPage extends StatefulWidget {
     required this.medicines,
   }) : super(key: key);
   @override
-  _UsingMedicinesPage createState() => _UsingMedicinesPage();
+  State<UsingMedicinesPage> createState() => _UsingMedicinesPage();
 }
 
 class _UsingMedicinesPage extends State<UsingMedicinesPage> {
@@ -72,172 +72,216 @@ class _UsingMedicinesPage extends State<UsingMedicinesPage> {
                 fontWeight: FontWeight.bold),
           ),
         ),
-        body:
-        Container(
-          width: size.width,
-          height: size.height,
-          decoration:const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xFF701ebd),
-                Color(0xFF873bcc),
-                Color(0xFFfe4a97),
-                Color(0xFFe17763),
-                Color(0xFF68998c),
-              ],
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft
-            )
-          ),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const SizedBox(height: 60.0),
-              Center(
-                child: Text(
-                  widget.medicines.name,
-                  style: const TextStyle(
-                fontSize: 32,
-                color: Colors.white,
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.bold),
-                ),
-              ),
-              const SizedBox(height: 20.0),
-              Center(
-                child: Text(
-                  widget.medicines.notes,
-                  style: const TextStyle(
-                fontSize: 16,
-                color: Colors.white,
-                fontFamily: 'Montserrat'),
-                ),
-              ),
-              const SizedBox(height: 60.0),
-              Center(
-                  child: Container(
-                padding: const EdgeInsets.all(20.0),
-                width: size.width * 0.9,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.4),
-                  border: Border.all(
-                    color: Colors.grey, // Set the border color
-                    width: 1.0, // Set the border width
-                  ),
-                  borderRadius:
-                      BorderRadius.circular(10.0), // Add rounded corners
-                ),
+        body: Container(
+            width: size.width,
+            height: size.height,
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(colors: [
+              Color(0xFFededed),
+              Color(0xFF9a9a9a),
+              Color(0xFF808080),
+              Color(0xFF9a9a9a),
+              Color(0xFFededed),
+            ], begin: Alignment.topRight, end: Alignment.bottomLeft)),
+            child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
                 child: Column(
-                  children: [
-                    TextField(
-                      controller: nameController,
-                      decoration: const InputDecoration(
-                        labelText: "Enter patient's name",
-                      ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      const Column(
-                        children: [
-                          Text(
-                            'Start date:',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          SizedBox(height: 50.0),
-                        ],
-                      ),
-                      const SizedBox(width: 20.0),
-                      Column(children: [
-                        Text(
-                          startDate.toString().split(' ')[0],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 60.0),
+                      Center(
+                        child: Text(
+                          widget.medicines.name,
                           style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blueAccent,
-                          ),
+                              fontSize: 32,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold),
                         ),
-                        const SizedBox(width: 20.0),
-                        ElevatedButton(
-                          onPressed: () async {
-                            await selectStartDate(context);
-                          },
-                          child: const Text('Select start date'),
-                        ),
-                      ]),
-                    ]),
-                    const SizedBox(height: 20.0),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      const Column(
-                        children: [
-                          Text(
-                            'End date:',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          SizedBox(height: 50.0),
-                        ],
                       ),
-                      const SizedBox(width: 20.0),
-                      Column(children: [
-                        Text(
-                          endDate.toString().split(' ')[0],
+                      const SizedBox(height: 20.0),
+                      Center(
+                        child: Text(
+                          widget.medicines.notes,
                           style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blueAccent,
-                          ),
+                              fontSize: 16,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat'),
                         ),
-                        const SizedBox(width: 20.0),
-                        ElevatedButton(
-                          onPressed: () async {
-                            await selectEndDate(context);
-                          },
-                          child: const Text('Select end date'),
-                        ),
-                      ]),
-                    ]),
-                    const SizedBox(height: 20.0),
-                    TextField(
-                      keyboardType: TextInputType
-                          .number, // Specify input type for numbers
-                      onChanged: (value) {
-                        // Handle the number input
-                        if (value.isEmpty) {
-                          setState(() {
-                            selectedNumber = 1; // Set to default if empty
-                          });
-                        } else {
-                          setState(() {
-                            selectedNumber = int.parse(value);
-                          });
-                        }
-                      },
-                      decoration: const InputDecoration(
-                        labelText: 'input the number of unit:',
                       ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    ElevatedButton(
-                      onPressed: () async {
-                        var sharedPref = await SharedPreferences.getInstance();
-                        String id = sharedPref.getString('productId')!;
-                        addUsingHistory(
-                            id,
-                            widget.medicines.name,
-                            UsingHistory(
-                                id: const Uuid().v4(),
-                                userName: nameController.text,
-                                startDate: startDate.toUtc().toIso8601String(),
-                                endDate: startDate.toUtc().toIso8601String(),
-                                quantity: selectedNumber,
-                                status: 1));
-                        // You can use the selected date (startDate) and number (selectedNumber) as needed
-                      },
-                      child: const Text('Use!'),
-                    ),
-                  ],
-                ),
-              ))
-            ]))));
+                      const SizedBox(height: 60.0),
+                      Center(
+                          child: Container(
+                        padding: const EdgeInsets.all(20.0),
+                        width: size.width * 0.9,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.4),
+                          border: Border.all(
+                            color: Colors.grey, // Set the border color
+                            width: 1.0, // Set the border width
+                          ),
+                          borderRadius: BorderRadius.circular(
+                              10.0), // Add rounded corners
+                        ),
+                        child: Column(
+                          children: [
+                            TextField(
+                              controller: nameController,
+                              decoration: const InputDecoration(
+                                labelText: "Enter patient's name",
+                              ),
+                            ),
+                            const SizedBox(height: 20.0),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Column(
+                                    children: [
+                                      Text(
+                                        'Start date:',
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      SizedBox(height: 50.0),
+                                    ],
+                                  ),
+                                  const SizedBox(width: 20.0),
+                                  Column(children: [
+                                    Text(
+                                      startDate.toString().split(' ')[0],
+                                      style: const TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 20.0),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.black
+                                              .withOpacity(0.4), // Border color
+                                          width: 1, // Border width
+                                        ),
+                                        borderRadius: BorderRadius.circular(
+                                            8.0), // Border radius
+                                      ),
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors
+                                              .transparent, // Make button background transparent
+                                          elevation: 0, // Remove button shadow
+                                        ),
+                                        onPressed: () async {
+                                          await selectStartDate(context);
+                                        },
+                                        child: const Text(
+                                          'Select start date',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),),
+                                      ),
+                                    )
+                                  ]),
+                                ]),
+                            const SizedBox(height: 20.0),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Column(
+                                    children: [
+                                      Text(
+                                        'End date:',
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      SizedBox(height: 50.0),
+                                    ],
+                                  ),
+                                  const SizedBox(width: 20.0),
+                                  Column(children: [
+                                    Text(
+                                      endDate.toString().split(' ')[0],
+                                      style: const TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 20.0),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.black
+                                              .withOpacity(0.4), // Border color
+                                          width: 1, // Border width
+                                        ),
+                                        borderRadius: BorderRadius.circular(
+                                            8.0), // Border radius
+                                      ),
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors
+                                              .transparent, // Make button background transparent
+                                          elevation: 0, // Remove button shadow
+                                        ),
+                                        onPressed: () async {
+                                          await selectEndDate(context);
+                                        },
+                                        child: const Text(
+                                          'Select end date',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),),
+                                      ),
+                                    )
+                                  ]),
+                                ]),
+                            const SizedBox(height: 20.0),
+                            TextField(
+                              keyboardType: TextInputType
+                                  .number, // Specify input type for numbers
+                              onChanged: (value) {
+                                // Handle the number input
+                                if (value.isEmpty) {
+                                  setState(() {
+                                    selectedNumber =
+                                        1; // Set to default if empty
+                                  });
+                                } else {
+                                  setState(() {
+                                    selectedNumber = int.parse(value);
+                                  });
+                                }
+                              },
+                              decoration: const InputDecoration(
+                                labelText: 'Input the number of unit:',
+                              ),
+                            ),
+                            const SizedBox(height: 20.0),
+                            ElevatedButton(
+                              onPressed: () async {
+                                var sharedPref =
+                                    await SharedPreferences.getInstance();
+                                String id = sharedPref.getString('productId')!;
+                                if (!mounted) return;
+                                addUsingHistory(
+                                    context,
+                                    id,
+                                    widget.medicines.name,
+                                    UsingHistory(
+                                        id: const Uuid().v4(),
+                                        userName: nameController.text,
+                                        startDate:
+                                            startDate.toUtc().toIso8601String(),
+                                        endDate:
+                                            startDate.toUtc().toIso8601String(),
+                                        quantity: selectedNumber,
+                                        status: 1));
+                              },
+                              child: const Text('Use!'),
+                            ),
+                          ],
+                        ),
+                      ))
+                    ]))));
   }
 }

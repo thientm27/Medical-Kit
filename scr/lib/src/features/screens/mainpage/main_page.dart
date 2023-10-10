@@ -29,9 +29,9 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> getLoginUser() async {
       var sharedPref = await SharedPreferences.getInstance();
-      String _userName = sharedPref.getString('userName')!;
+      String name = sharedPref.getString('userName')!;
       setState(() {
-        userName = _userName;
+        userName = name;
       });
     }
 
@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                       Pharmacist(
                         pharmacistModel: PharmacistModel(
                           image: pharmacist1, // Replace with the actual image path
-                          name: 'Pharmacist1',      // Replace with the actual name
+                          name: 'Daniel Miller',      // Replace with the actual name
                           room: '1',      // Replace with the actual room
                         ),
                       ),
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                       Pharmacist(
                         pharmacistModel: PharmacistModel(
                           image: pharmacist2, // Replace with the actual image path
-                          name: 'Pharmacist2',      // Replace with the actual name
+                          name: 'Christopher Anderson',      // Replace with the actual name
                           room: '2',      // Replace with the actual room
                         ),
                       ),
@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                       Pharmacist(
                         pharmacistModel: PharmacistModel(
                           image: pharmacist3, // Replace with the actual image path
-                          name: 'Pharmacist3',      // Replace with the actual name
+                          name: 'Samuel Jackson',      // Replace with the actual name
                           room: '3',      // Replace with the actual room
                         ),
                       ),
@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                       Pharmacist(
                         pharmacistModel: PharmacistModel(
                           image: pharmacist4, // Replace with the actual image path
-                          name: 'Pharmacist4',      // Replace with the actual name
+                          name: 'Sophia Patel',      // Replace with the actual name
                           room: '4',      // Replace with the actual room
                         ),
                       ),
