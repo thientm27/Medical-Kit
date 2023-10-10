@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'src/features/screens/on_boarding_screen.dart';
 
-void main() 
-  => runApp(const App());
+void main() async {
+  runApp(const App());
+}
 
 
 class App extends StatelessWidget {

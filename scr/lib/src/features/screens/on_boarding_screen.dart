@@ -5,7 +5,7 @@ import 'package:scr/src/constants/images.dart';
 import 'package:scr/src/constants/texts.dart';
 import 'package:scr/src/features/models/models_on_boarding.dart';
 import 'package:scr/src/features/screens/on_boarding_page_widget.dart';
-import 'package:scr/src/features/screens/login/login_screen.dart';
+import 'package:scr/src/features/screens/login/pre_use_screen.dart';
 
 class OnBoardingScreen extends StatelessWidget{
   const OnBoardingScreen({Key? key,
@@ -70,7 +70,7 @@ class OnBoardingScreen extends StatelessWidget{
                 bottom: 0.0,
                 child: OutlinedButton(
                   onPressed: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>const LoginScreen()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>const PreUse()));
                   },
                   style: ElevatedButton.styleFrom(
                     side: const BorderSide(color: Colors.black26),

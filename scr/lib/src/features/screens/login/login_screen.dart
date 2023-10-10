@@ -4,7 +4,7 @@ import 'package:scr/src/constants/images.dart';
 import 'package:scr/src/constants/sizes.dart';
 import 'package:scr/src/constants/texts.dart';
 import 'package:scr/src/constants/colors.dart';
-import 'package:scr/src/features/screens/mainpage/main_page.dart';
+import 'package:scr/src/features/controllers/user_controller.dart';
 
 bool _signInActive = true;
 
@@ -98,7 +98,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) =>const HomePage()));
+                    String email = emailController.text;
+                    String password = passwordController.text;
+                    login(context, email, password);
                   },
                   child: Text(tLogin.toUpperCase()),
                 )),

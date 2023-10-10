@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:scr/src/constants/colors.dart';
 import 'package:scr/src/constants/images.dart';
 import 'package:scr/src/features/models/models_pharmacist.dart';
+import 'package:scr/src/features/screens/mainpage/box.dart';
 import 'package:scr/src/features/screens/mainpage/pharmacist.dart';
+import 'package:scr/src/features/screens/medicines/mybox.dart';
+import 'package:scr/src/features/screens/news/news_main_page.dart';
 import 'package:scr/src/features/screens/disease/popular_disease.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:scr/src/features/screens/tips/tips.dart';
+import 'package:scr/src/features/screens/usingHistory/using_history_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -12,7 +18,23 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+
 class _HomePageState extends State<HomePage> {
+  String userName = "";
+   @override
+  void initState() {
+    super.initState();
+    getLoginUser();
+  }
+
+  Future<void> getLoginUser() async {
+      var sharedPref = await SharedPreferences.getInstance();
+      String _userName = sharedPref.getString('userName')!;
+      setState(() {
+        userName = _userName;
+      });
+    }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,19 +46,22 @@ class _HomePageState extends State<HomePage> {
                    SizedBox(
                     height: 80,        
                     child: Padding(
-                    padding:const EdgeInsets.all(8.0), 
+                    padding:const EdgeInsets.all(0.0), 
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                      const Image(
-                          image: AssetImage(userImage),
-                          height: 50,
+                      IconButton(
+                          onPressed: () {},
+                          icon:const Icon(
+                          Ionicons.menu_outline,
+                          color: Colors.black,
+                          ),
                         ),
-                      const Column(
+                       Column(
                           mainAxisAlignment: MainAxisAlignment.center, 
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children:[ 
-                            Text(
+                            const Text(
                             'Hello there,',
                             style: TextStyle(
                               color: Colors.black,
@@ -45,8 +70,8 @@ class _HomePageState extends State<HomePage> {
                               fontWeight: FontWeight.bold),
                         ),  
                             Text(
-                            'Do Thanh Bo',
-                            style: TextStyle(
+                            userName,
+                            style:const TextStyle(
                               color: Colors.black,
                               fontFamily: 'Montserrat',
                               fontSize: 18,
@@ -67,7 +92,7 @@ class _HomePageState extends State<HomePage> {
 
                 GestureDetector(
                   onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => PopularDisease()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PopularDisease()));
                   },
                   child: Container(
                     height: 100,        
@@ -123,6 +148,7 @@ class _HomePageState extends State<HomePage> {
                           room: '1',      // Replace with the actual room
                         ),
                       ),
+                      const SizedBox(width: 20.0), 
                       Pharmacist(
                         pharmacistModel: PharmacistModel(
                           image: pharmacist2, // Replace with the actual image path
@@ -130,6 +156,7 @@ class _HomePageState extends State<HomePage> {
                           room: '2',      // Replace with the actual room
                         ),
                       ),
+                      const SizedBox(width: 20.0),
                       Pharmacist(
                         pharmacistModel: PharmacistModel(
                           image: pharmacist3, // Replace with the actual image path
@@ -137,6 +164,7 @@ class _HomePageState extends State<HomePage> {
                           room: '3',      // Replace with the actual room
                         ),
                       ),
+                      const SizedBox(width: 20.0),
                       Pharmacist(
                         pharmacistModel: PharmacistModel(
                           image: pharmacist4, // Replace with the actual image path
@@ -148,109 +176,33 @@ class _HomePageState extends State<HomePage> {
                       )
                     ),
                     const SizedBox(height: 25.0), 
-                    Row(
+                     Row(
                      mainAxisAlignment: MainAxisAlignment.center, // Align buttons to the center horizontally
                       children: [
-                         SizedBox(
-                          width: 160, // Set the width for the first button
-                          height: 100,
-                          child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            backgroundColor: Colors.white,
-                            side:const BorderSide(
-                              color: tRedColor, // Replace with your desired border color
-                              width: 2.0, // Replace with your desired border width
-                              ),
-                          ),
-                          child:const Text(
-                            'Medical tips',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              ),                         
-                            ),
-                        ),
-                        ),
-                        const SizedBox(width: 20), // Add some spacing between the buttons
-                         SizedBox(
-                          width: 160, // Set the width for the first button
-                          height: 100,
-                          child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            backgroundColor: Colors.white,
-                            side:const BorderSide(
-                              color: tRedColor, // Replace with your desired border color
-                              width: 2.0, // Replace with your desired border width
-                              ),
-                          ),
-                          child:const Text(
-                            'Medical Refills',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              ),                         
-                            ),
-                        ),
-                        ),
+                        Box(titleString: 'Medical tips', onPressedCallback: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TipsScreen()));
+                        }),
+                        const SizedBox(width: 20.0), 
+                        Box(titleString: 'Using History', onPressedCallback: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const UsingHistoryPage()));
+                        },),
                         ],
                       ),
                       const SizedBox(height: 25.0), 
                       Row(
                       mainAxisAlignment: MainAxisAlignment.center, 
                       children: [
-                         SizedBox(
-                          width: 160, // Set the width for the first button
-                          height: 100,
-                          child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            backgroundColor: Colors.white,
-                            side:const BorderSide(
-                              color: tRedColor, 
-                              width: 2.0, 
-                              ),
-                          ),
-                          child:const Text(
-                            'Using history',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              ),                         
-                            ),
-                        ),
-                        ),
+                        Box(titleString: 'My Family Box', onPressedCallback: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MyBox()
+                          )
+                          );},),
                         const SizedBox(width: 20),
-                        SizedBox(
-                          width: 160, 
-                          height: 100,
-                          child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            backgroundColor: Colors.white,
-                            side:const BorderSide(
-                              color: tRedColor, 
-                              width: 2.0, 
-                              ),
+                        Box(titleString: 'News', onPressedCallback: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const NewsMainPage()
+                          )
+                          );
+                          },
                           ),
-                          child:const Text(
-                            'Diseases news',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              ),                         
-                            ),
-                        ),
-                        ),
                         ],
                       )
                   ]

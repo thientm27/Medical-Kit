@@ -16,17 +16,20 @@ class Pharmacist extends StatelessWidget {
         onTap: (){
           Navigator.of(context).push(MaterialPageRoute(builder: (context) => CallPage(callID : pharmacistModel.room)));
         },
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-            color: Colors.red, // Set the border color here
-            width: 5.0,         // Set the border width here
-          ),
-          borderRadius: BorderRadius.circular(10.0), // Optional: Add rounded corners
-      ),
-        child: Container(
-            color: Colors.white,
-                  child: Column(
+          child: Container(
+            color: Colors.transparent,
+            child: Material(
+            elevation: 10, 
+            shape:const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15.0), // Adjust horizontal radius
+                topRight: Radius.circular(15.0), // Adjust horizontal radius
+                bottomLeft: Radius.circular(15.0), // Adjust horizontal radius
+                bottomRight: Radius.circular(15.0), // Adjust horizontal radius
+              ),
+            ),
+            clipBehavior: Clip.antiAlias, 
+            child: Column(
                     children: [            
                       Image(
                         image: AssetImage(pharmacistModel.image), 
@@ -44,6 +47,8 @@ class Pharmacist extends StatelessWidget {
                       ),
                       ],
                     )
-    )));
+    )
+     ) );
+      
   }
 }

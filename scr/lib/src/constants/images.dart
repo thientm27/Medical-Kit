@@ -14,3 +14,10 @@ const String pharmacist3 = 'assets/pharmacist/Pharmacist3.jpg';
 const String pharmacist4 = 'assets/pharmacist/Pharmacist4.jpg';
 
 const String userImage = 'assets/user.png';
+
+const String news1 = 'assets/news/news1.png';
+const String news2 = 'assets/news/news2.png';
+const String news3 = 'assets/news/news3.png';
+const String news4 = 'assets/news/news4.png';
+
+const String backgroundImage = 'assets/medicine.jpg';

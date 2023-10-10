@@ -2,39 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:scr/src/features/models/model_disease.dart';
 import 'package:scr/src/constants/colors.dart';
 import 'package:scr/src/features/screens/disease/disease_detail.dart';
-class PopularDisease extends StatelessWidget {
-  PopularDisease({Key? key}) : super(key: key);
+import 'package:scr/src/features/controllers/disease_controller.dart';
 
+class PopularDisease extends StatefulWidget {
+  const PopularDisease({Key? key}) : super(key: key);
+ @override
+  _PopularDiseaseState createState() => _PopularDiseaseState();
+}
 
-final List<Disease> diseases = [
-  Disease(
-    id: '1',
-    name: "Influenza",
-    description: "Influenza is a viral infection...",
-    symptoms: "Fever, cough, body aches...",
-    prevalence: "Common",
-    riskFactors: "Exposure to infected individuals...",
-    treatment: "Antiviral medications...",
-    prognosis: "Most people recover within a week...",
-  ),
-  Disease(
-    id: '2',
-    name: "COVID-19",
-    description: "COVID-19 is a highly contagious respiratory illness...",
-    symptoms: "Fever, cough, shortness of breath...",
-    prevalence: "Pandemic",
-    riskFactors: "Exposure to infected individuals, comorbidities...",
-    treatment: "Supportive care, vaccines...",
-    prognosis: "Varies depending on severity...",
-  ),
-  // Add more diseases as needed
-];
+class _PopularDiseaseState extends State<PopularDisease> {
+  List<Disease> diseases = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+      List<Disease> fetchedDiseases = await getAllDiseases();
+      setState(() {
+        diseases = fetchedDiseases;
+      });
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text('Popular diseases')
+        title:const Text(
+          'Popular diseases',
+          style: TextStyle(
+              fontFamily: 'Montserrat',
+              fontSize: 18,
+              fontWeight: FontWeight.bold),
+          )
       ),
       body:Container(
         color: tOnBoardingPage1Color,
@@ -49,7 +52,8 @@ final List<Disease> diseases = [
               color: Colors.black,
               fontFamily: 'Montserrat',
               fontSize: 18,
-              fontWeight: FontWeight.bold),
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.underline),
             ),
             trailing:const Icon(Icons.arrow_forward_ios_rounded),
             onTap: (){
