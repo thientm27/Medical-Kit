@@ -1,26 +1,35 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:scr/src/constants/colors.dart';
 import 'package:scr/src/constants/images.dart';
-import 'package:scr/src/features/screens/login/login_screen.dart';
-import 'package:scr/src/features/controllers/user_controller.dart';
+import 'package:scr/src/constants/sizes.dart';
+import 'package:scr/src/constants/texts.dart';
+import 'package:scr/src/constants/colors.dart';
 
-import '../../../constants/sizes.dart';
-import '../../../constants/texts.dart';
-class PreUse extends StatefulWidget {
-  const PreUse({Key? key}) : super(key: key);
+import 'login_screen.dart';
+
+bool obscureText = false;
+
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  _PreUseState createState() => _PreUseState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _PreUseState extends State<PreUse> {
+class _RegisterScreenState extends State<RegisterScreen> {
   late Size mediaSize;
-  final TextEditingController enterCodeController = TextEditingController();
+  TextEditingController signupEmailController = TextEditingController();
+  TextEditingController signupPasswordController =TextEditingController();
+  TextEditingController signupRePasswordController =TextEditingController();
+  bool rememberUser = false;
 
   @override
   void dispose() {
-    enterCodeController.dispose();
+    // Clean up the controller when the widget is removed from the widget tree.
+    // This also removes the _printLatestValue listener.
+    signupEmailController.dispose();
+    signupPasswordController.dispose();
+    signupRePasswordController.dispose();
     super.dispose();
   }
 
@@ -52,22 +61,22 @@ class _PreUseState extends State<PreUse> {
 
   Widget _buildBottom() {
     return SizedBox(
-        width: mediaSize.width,
-        height: 520,
-        child: Card(
+      width: mediaSize.width,
+      height: 520,
+      child: Card(
         shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(30),
-    topRight: Radius.circular(30),
-    )),
-    child: Padding(
-    padding: const EdgeInsets.all(20.0),
-    child: _buildFormCodeInput()),
-    ),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            )),
+        child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: _buildFormSignUp()),
+      ),
     );
   }
 
-  Widget _buildFormCodeInput() {
+  Widget _buildFormSignUp() {
     return Form(
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: tFormHeight - 20),
@@ -75,7 +84,7 @@ class _PreUseState extends State<PreUse> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              "Input Code",
+              tSignUp,
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 30,
@@ -84,31 +93,24 @@ class _PreUseState extends State<PreUse> {
             const SizedBox(
               height: tFormHeight,
             ),
-            _buildInputField("Enter your code here", enterCodeController),
+            _buildInputField(tEmail, signupEmailController),
             const SizedBox(
-              height: tFormHeight-20,
+              height: tFormHeight - 15,
             ),
-            const Text(
-              "Please input your code int the Kit to use our app",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500),
+            _buildPasswordInputField(tPassword, signupPasswordController),
+            const SizedBox(
+              height: tFormHeight - 15,
             ),
+            _buildPasswordInputField(tConfirmPassword, signupRePasswordController),
             const SizedBox(
               height: tFormHeight+10,
-            ),
-            const SizedBox(
-              height: tFormHeight - 10,
             ),
             SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    final enteredText = enterCodeController.text;
-                    preLogin(context, enteredText);
                   },
-                  child: Text("Sign up".toUpperCase()),
+                  child: Text(tSignUp.toUpperCase()),
                 )),
             const SizedBox(
               height: tFormHeight - 10,
@@ -168,6 +170,55 @@ class _PreUseState extends State<PreUse> {
     );
   }
 
+  Widget _buildPasswordInputField(String text, TextEditingController controller) {
+    return TextFormField(
+      controller: controller,
+      obscureText : obscureText,
+      decoration: InputDecoration(
+          prefixIcon: const Icon(Icons.fingerprint),
+          labelText: text,
+          hintText: text,
+          border: const OutlineInputBorder(),
+          suffixIcon: IconButton(
+            onPressed: (){
+              setState(() {
+                obscureText = !obscureText;
+              });
+              print(obscureText);},
+            icon: const Icon(Icons.remove_red_eye_sharp),
+          )),
+    );
+  }
+
+  Widget _buildRememberForgot() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Transform.scale(
+              scale: 0.7,
+              child: Checkbox(
+                  value: rememberUser,
+                  onChanged: (value) {
+                    setState(() {
+                      rememberUser = value!;
+                    });
+                  }),
+            ),
+            const Text(
+              "Remember me",
+              style: TextStyle(color: Colors.grey, fontSize: 12),
+            )
+          ],
+        ),
+        TextButton(
+            onPressed: () {},
+            child: const Text(
+              tForgotPassword,
+              style: TextStyle(color: Colors.grey, fontSize: 12),
+            ))
+      ],
+    );
+  }
 }
-
-

@@ -5,8 +5,11 @@ import 'package:scr/src/constants/sizes.dart';
 import 'package:scr/src/constants/texts.dart';
 import 'package:scr/src/constants/colors.dart';
 import 'package:scr/src/features/controllers/user_controller.dart';
+import 'package:scr/src/features/screens/login/pre_use_screen.dart';
+import 'package:scr/src/features/screens/login/register_screen.dart';
 
-bool _signInActive = true;
+int _signInActive = 1;
+bool obscureText = false;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -19,7 +22,24 @@ class _LoginScreenState extends State<LoginScreen> {
   late Size mediaSize;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController enterCodeController = TextEditingController();
+  TextEditingController signupEmailController = TextEditingController();
+  TextEditingController signupPasswordController =TextEditingController();
+  TextEditingController signupRePasswordController =TextEditingController();
   bool rememberUser = false;
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the widget tree.
+    // This also removes the _printLatestValue listener.
+    emailController.dispose();
+    passwordController.dispose();
+    enterCodeController.dispose();
+    signupEmailController.dispose();
+    signupPasswordController.dispose();
+    signupRePasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +56,18 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
+  // Widget changePage(BuildContext context) {
+  //   Widget child;
+  //   if (_signInActive == 0) {
+  //     child = _buildFormSignUp();
+  //   } else if (_signInActive == 1) {
+  //     child = _buildFormLogin();
+  //   } else {
+  //     child = _buildFormCodeInput();
+  //   }
+  //   return child;
+  // }
 
   Widget _buildTop() {
     return SizedBox(
@@ -59,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
         )),
         child: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: _signInActive ? _buildFormLogin() : _buildFormSignUp()),
+            child: _buildFormLogin()),
       ),
     );
   }
@@ -86,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: tFormHeight - 20,
             ),
-            _buildInputField(tPassword, passwordController, isPassword: true),
+            _buildPasswordInputField(tPassword, passwordController),
             const SizedBox(
               height: tFormHeight - 20,
             ),
@@ -134,9 +166,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: const TextStyle(color: Colors.blue),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                setState(() {
-                                  _signInActive = false;
-                                });
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>const PreUse(),
+                                  ),
+                                );
                               }),
                       ]
                     ),
@@ -167,15 +202,15 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: tFormHeight,
             ),
-            _buildInputField(tEmail, emailController),
+            _buildInputField(tEmail, signupEmailController),
             const SizedBox(
               height: tFormHeight - 15,
             ),
-            _buildInputField(tPassword, passwordController, isPassword: true),
+            _buildPasswordInputField(tPassword, signupPasswordController),
             const SizedBox(
               height: tFormHeight - 15,
             ),
-            _buildInputField(tConfirmPassword, passwordController, isPassword: true),
+            _buildPasswordInputField(tConfirmPassword, signupRePasswordController),
             const SizedBox(
               height: tFormHeight+10,
             ),
@@ -209,7 +244,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: const TextStyle(color: Colors.blue),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                setState(() {_signInActive = true;});
+                                setState(() {_signInActive = 1;});
                               }
                         ),
                       ],
@@ -224,22 +259,117 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildInputField(String text, TextEditingController controller,
-      {isPassword = false}) {
+  Widget _buildFormCodeInput() {
+    return Form(
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: tFormHeight - 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Input Code",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(
+              height: tFormHeight,
+            ),
+            _buildInputField("Enter your code here", enterCodeController),
+            const SizedBox(
+              height: tFormHeight-20,
+            ),
+            const Text(
+              "Please input your code int the Kit to use out app",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(
+              height: tFormHeight+10,
+            ),
+            const SizedBox(
+              height: tFormHeight - 10,
+            ),
+            SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {_signInActive = 0;});
+                  },
+                  child: Text("Buy Now".toUpperCase()),
+                )),
+            const SizedBox(
+              height: tFormHeight - 10,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  width: double.infinity,
+                  height: tFormHeight - 10,
+                ),
+                TextButton(
+                  onPressed: () {
+                  },
+                  child: Text.rich(
+                    TextSpan(
+                      text: tHaveAccount,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                      children: [
+                        TextSpan(
+                            text: " $tLogin",
+                            style: const TextStyle(color: Colors.blue),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                setState(() {_signInActive = 1;});
+                              }
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildInputField(String text, TextEditingController controller ) {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
-          prefixIcon: isPassword
-              ? const Icon(Icons.fingerprint)
-              : const Icon(Icons.person_outline_outlined),
+          prefixIcon: const Icon(Icons.person_outline_outlined),
+          labelText: text,
+          hintText: text,
+          border: const OutlineInputBorder(),
+          suffixIcon: const IconButton(
+            onPressed: null,
+            icon: Icon(null),
+          )),
+    );
+  }
+
+  Widget _buildPasswordInputField(String text, TextEditingController controller) {
+    return TextFormField(
+      controller: controller,
+      obscureText : obscureText,
+      decoration: InputDecoration(
+          prefixIcon: const Icon(Icons.fingerprint),
           labelText: text,
           hintText: text,
           border: const OutlineInputBorder(),
           suffixIcon: IconButton(
-            onPressed: null,
-            icon: isPassword
-                ? const Icon(Icons.remove_red_eye_sharp)
-                : const Icon(null),
+            onPressed: (){
+              setState(() {
+              obscureText = !obscureText;
+            });
+              print(obscureText);},
+            icon: const Icon(Icons.remove_red_eye_sharp),
           )),
     );
   }
