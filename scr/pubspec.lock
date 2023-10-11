@@ -169,14 +169,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
-  date_only_field:
-    dependency: "direct main"
-    description:
-      name: date_only_field
-      sha256: "97b5eef9df029bed6cf679d1b5dcd3805de906ff66163cb261ea4bab0e87270a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.14"
   dbus:
     dependency: transitive
     description:
@@ -288,14 +280,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  fluttertoast:
-    dependency: "direct main"
-    description:
-      name: fluttertoast
-      sha256: "474f7d506230897a3cd28c965ec21c5328ae5605fc9c400cd330e9e9d6ac175c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "8.2.2"
   get:
     dependency: "direct main"
     description:
@@ -313,7 +297,7 @@ packages:
     source: hosted
     version: "6.1.0"
   http:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: http
       sha256: "759d1a329847dd0f39226c688d3e06a6b8679668e350e2891a6474f8b4bb8525"
@@ -593,7 +577,7 @@ packages:
     source: hosted
     version: "0.27.7"
   shared_preferences:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: shared_preferences
       sha256: b7f41bad7e521d205998772545de63ff4e6c97714775902c199353f8bf1511ac
@@ -750,7 +734,7 @@ packages:
     source: hosted
     version: "1.3.2"
   uuid:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: uuid
       sha256: "648e103079f7c64a36dc7d39369cabb358d377078a051d6ae2ad3aa539519313"
