@@ -7,7 +7,7 @@ import 'package:scr/src/constants/colors.dart';
 
 import 'login_screen.dart';
 
-bool obscureText = false;
+bool obscureText = true;
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
