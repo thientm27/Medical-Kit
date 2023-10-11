@@ -115,7 +115,7 @@ class _UsingMedicinesPage extends State<UsingMedicinesPage> {
                         padding: const EdgeInsets.all(20.0),
                         width: size.width * 0.9,
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.4),
+                          color: Colors.white.withOpacity(0.7),
                           border: Border.all(
                             color: Colors.grey, // Set the border color
                             width: 1.0, // Set the border width

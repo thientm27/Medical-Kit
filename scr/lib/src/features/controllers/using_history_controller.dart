@@ -7,7 +7,7 @@ import 'package:scr/src/features/screens/mainpage/main_page.dart';
 
 Future addUsingHistory(BuildContext context, productId, String medicineName, UsingHistory usingHistory) async 
 {
-  final uri = Uri.parse('http://10.0.2.2:5102/api/UsingHistory?id=$productId&medicineName=$medicineName');
+  final uri = Uri.parse('http://ronalbo2610-001-site1.ftempurl.com/api/UsingHistory?id=$productId&medicineName=$medicineName');
   final headers = {'Content-Type': 'application/json'};
 
   Map<String, dynamic> historyJson = usingHistory.toJson();

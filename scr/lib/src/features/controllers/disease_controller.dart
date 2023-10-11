@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 Future<List<Disease>> getAllDiseases() async {
-  final uri = Uri.parse('http://10.0.2.2:5102/api/Disease');
+  final uri = Uri.parse('http://ronalbo2610-001-site1.ftempurl.com/api/Disease');
   try {
     final response = await http.get(uri);
 

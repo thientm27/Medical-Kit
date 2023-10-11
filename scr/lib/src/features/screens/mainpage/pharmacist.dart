@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scr/src/features/models/models_pharmacist.dart';
-import 'package:scr/src/features/screens/call.dart';
+import 'package:scr/src/features/controllers/call_controller.dart';
 class Pharmacist extends StatelessWidget {
 
   final PharmacistModel pharmacistModel;
@@ -14,7 +14,7 @@ class Pharmacist extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => CallPage(callID : pharmacistModel.room)));
+          navigateToCallPage(context, pharmacistModel.room);
         },
           child: Container(
             color: Colors.transparent,
