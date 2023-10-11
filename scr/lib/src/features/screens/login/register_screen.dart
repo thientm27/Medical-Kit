@@ -1,16 +1,20 @@
-import 'package:flutter/gestures.dart';
+
 import 'package:flutter/material.dart';
 import 'package:scr/src/constants/images.dart';
 import 'package:scr/src/constants/sizes.dart';
 import 'package:scr/src/constants/texts.dart';
 import 'package:scr/src/constants/colors.dart';
-
-import 'login_screen.dart';
+import 'package:scr/src/features/controllers/user_controller.dart';
+import 'package:scr/src/features/models/model_user.dart';
+import 'package:uuid/uuid.dart';
 
 bool obscureText = false;
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  final String productId;
+  const RegisterScreen({Key? key,
+ required this.productId}
+  ) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -20,7 +24,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late Size mediaSize;
   TextEditingController signupEmailController = TextEditingController();
   TextEditingController signupPasswordController =TextEditingController();
-  TextEditingController signupRePasswordController =TextEditingController();
+  TextEditingController signupNameController =TextEditingController();
   bool rememberUser = false;
 
   @override
@@ -29,7 +33,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     // This also removes the _printLatestValue listener.
     signupEmailController.dispose();
     signupPasswordController.dispose();
-    signupRePasswordController.dispose();
+    signupNameController.dispose();
     super.dispose();
   }
 
@@ -93,6 +97,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(
               height: tFormHeight,
             ),
+             _buildInputField(tName, signupNameController),
+            const SizedBox(
+              height: tFormHeight - 15,
+            ),
             _buildInputField(tEmail, signupEmailController),
             const SizedBox(
               height: tFormHeight - 15,
@@ -101,53 +109,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(
               height: tFormHeight - 15,
             ),
-            _buildPasswordInputField(tConfirmPassword, signupRePasswordController),
-            const SizedBox(
-              height: tFormHeight+10,
-            ),
             SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
+                    User user = User(
+                      id: const Uuid().v4(),
+                      name: signupNameController.text,
+                      email: signupEmailController.text,
+                      password: signupPasswordController.text,
+                      gender: 1,
+                      status: 1,
+                      productId: widget.productId
+                    );
+                    signUp(context, user);
                   },
                   child: Text(tSignUp.toUpperCase()),
                 )),
             const SizedBox(
               height: tFormHeight - 10,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  width: double.infinity,
-                  height: tFormHeight - 10,
-                ),
-                TextButton(
-                  onPressed: () {
-                  },
-                  child: Text.rich(
-                    TextSpan(
-                      text: tHaveAccount,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                      children: [
-                        TextSpan(
-                            text: " $tLogin",
-                            style: const TextStyle(color: Colors.blue),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>const LoginScreen(),
-                                  ),
-                                );
-                              }
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
             ),
           ],
         ),

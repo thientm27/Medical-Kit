@@ -11,6 +11,7 @@ const String counter3 = "3/4";
 const String counter4 = "4/4";
 
 //Login & sign up
+const String tName = "Name";
 const String tEmail = "Email";
 const String tPassword = "Password";
 const String tConfirmPassword = "Confirm Password";

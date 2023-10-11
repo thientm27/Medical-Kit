@@ -4,6 +4,7 @@ import 'package:scr/src/constants/colors.dart';
 import 'package:scr/src/constants/images.dart';
 import 'package:scr/src/features/screens/login/login_screen.dart';
 import 'package:scr/src/features/controllers/user_controller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../constants/sizes.dart';
 import '../../../constants/texts.dart';
@@ -12,6 +13,15 @@ class PreUse extends StatefulWidget {
 
   @override
   State<PreUse> createState() => _PreUseState();
+}
+
+launchURL() async {
+  const url = 'https://hvpexe.github.io/Medkit-landingpage/index.html';
+  if (await canLaunchUrl(Uri.parse(url))) {
+    await launchUrl(Uri.parse(url));
+  } else {
+    throw 'Could not launch $url';
+  }
 }
 
 class _PreUseState extends State<PreUse> {
@@ -116,6 +126,12 @@ class _PreUseState extends State<PreUse> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                TextButton(
+                  onPressed: () {
+                    launchURL();
+                  },
+                  child:const Text('Buy now!'),
+                  ),
                 const SizedBox(
                   width: double.infinity,
                   height: tFormHeight - 10,

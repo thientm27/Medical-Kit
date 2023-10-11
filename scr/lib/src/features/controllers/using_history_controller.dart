@@ -34,7 +34,7 @@ final response = await http.put(uri, headers: headers, body: jsonEncode(historyJ
 }
 
 Future<List<UsingHistory>> getUsingHistory(String id) async {
-  final uri = Uri.parse('http://10.0.2.2:5102/api/UsingHistory/?id=$id');
+  final uri = Uri.parse('http://ronalbo2610-001-site1.ftempurl.com/api/UsingHistory/?id=$id');
   try {
     final response = await http.get(uri);
 

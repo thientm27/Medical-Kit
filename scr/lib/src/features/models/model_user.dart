@@ -26,4 +26,15 @@ class User{
     productId: json['productId'],
     status: json['status'],
   );
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id, 
+      'name': name,
+      'gender': gender,
+      'email': email,
+      'password': password,
+      'productId': productId,
+      'status': status,
+    };
+  }
 }

@@ -6,7 +6,6 @@ import 'package:scr/src/constants/texts.dart';
 import 'package:scr/src/constants/colors.dart';
 import 'package:scr/src/features/controllers/user_controller.dart';
 import 'package:scr/src/features/screens/login/pre_use_screen.dart';
-import 'package:scr/src/features/screens/login/register_screen.dart';
 
 int _signInActive = 1;
 bool obscureText = false;
