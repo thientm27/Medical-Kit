@@ -169,36 +169,4 @@ class _RegisterScreenState extends State<RegisterScreen> {
           )),
     );
   }
-
-  Widget _buildRememberForgot() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            Transform.scale(
-              scale: 0.7,
-              child: Checkbox(
-                  value: rememberUser,
-                  onChanged: (value) {
-                    setState(() {
-                      rememberUser = value!;
-                    });
-                  }),
-            ),
-            const Text(
-              "Remember me",
-              style: TextStyle(color: Colors.grey, fontSize: 12),
-            )
-          ],
-        ),
-        TextButton(
-            onPressed: () {},
-            child: const Text(
-              tForgotPassword,
-              style: TextStyle(color: Colors.grey, fontSize: 12),
-            ))
-      ],
-    );
-  }
 }
