@@ -8,7 +8,7 @@ import 'package:scr/src/features/controllers/user_controller.dart';
 import 'package:scr/src/features/screens/login/pre_use_screen.dart';
 
 int _signInActive = 1;
-bool obscureText = false;
+bool obscureText = true;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);

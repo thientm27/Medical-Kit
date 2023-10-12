@@ -8,7 +8,7 @@ import 'package:scr/src/features/controllers/user_controller.dart';
 import 'package:scr/src/features/models/model_user.dart';
 import 'package:uuid/uuid.dart';
 
-bool obscureText = false;
+bool obscureText = true;
 
 class RegisterScreen extends StatefulWidget {
   final String productId;
