@@ -8,6 +8,7 @@ class Disease{
   final String riskFactors;
   final String treatment;
   final String prognosis;
+  String? image;
   final List<Medicine>? medicines;
 
   Disease({
@@ -19,6 +20,7 @@ class Disease{
     required this.riskFactors,
     required this.treatment,
     required this.prognosis,
+    this. image,
     this.medicines,
   });
 

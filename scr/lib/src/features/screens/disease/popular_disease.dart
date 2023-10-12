@@ -3,7 +3,7 @@ import 'package:scr/src/features/models/model_disease.dart';
 import 'package:scr/src/constants/colors.dart';
 import 'package:scr/src/features/screens/disease/disease_detail.dart';
 import 'package:scr/src/features/controllers/disease_controller.dart';
-
+import 'package:scr/src/constants/images.dart';
 class PopularDisease extends StatefulWidget {
   const PopularDisease({Key? key}) : super(key: key);
  @override
@@ -23,6 +23,8 @@ class _PopularDiseaseState extends State<PopularDisease> {
       List<Disease> fetchedDiseases = await getAllDiseases();
       setState(() {
         diseases = fetchedDiseases;
+        diseases[0].image = allergic;
+        diseases[1].image = allergic;
       });
   }
 

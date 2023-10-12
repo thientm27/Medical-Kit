@@ -5,6 +5,7 @@ import 'package:scr/src/features/controllers/using_history_controller.dart';
 import 'package:scr/src/features/models/model_using_history.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class UsingMedicinesPage extends StatefulWidget {
   final Medicine medicines;
@@ -40,7 +41,7 @@ class _UsingMedicinesPage extends State<UsingMedicinesPage> {
   Future<void> selectEndDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: startDate,
+      initialDate: endDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
@@ -178,7 +179,8 @@ class _UsingMedicinesPage extends State<UsingMedicinesPage> {
                                           'Select start date',
                                           style: TextStyle(
                                             color: Colors.black,
-                                          ),),
+                                          ),
+                                        ),
                                       ),
                                     )
                                   ]),
@@ -230,7 +232,8 @@ class _UsingMedicinesPage extends State<UsingMedicinesPage> {
                                           'Select end date',
                                           style: TextStyle(
                                             color: Colors.black,
-                                          ),),
+                                          ),
+                                        ),
                                       ),
                                     )
                                   ]),
@@ -259,23 +262,34 @@ class _UsingMedicinesPage extends State<UsingMedicinesPage> {
                             const SizedBox(height: 20.0),
                             ElevatedButton(
                               onPressed: () async {
-                                var sharedPref =
-                                    await SharedPreferences.getInstance();
-                                String id = sharedPref.getString('productId')!;
-                                if (!mounted) return;
-                                addUsingHistory(
-                                    context,
-                                    id,
-                                    widget.medicines.name,
-                                    UsingHistory(
-                                        id: const Uuid().v4(),
-                                        userName: nameController.text,
-                                        startDate:
-                                            startDate.toUtc().toIso8601String(),
-                                        endDate:
-                                            startDate.toUtc().toIso8601String(),
-                                        quantity: selectedNumber,
-                                        status: 1));
+                                if (nameController.text.isNotEmpty &&
+                                    selectedNumber > 0) {
+                                  var sharedPref =
+                                      await SharedPreferences.getInstance();
+                                  String id =
+                                      sharedPref.getString('productId')!;
+                                  if (!mounted) return;
+                                  addUsingHistory(
+                                      context,
+                                      id,
+                                      widget.medicines.name,
+                                      UsingHistory(
+                                          id: const Uuid().v4(),
+                                          userName: nameController.text,
+                                          startDate: startDate
+                                              .toUtc()
+                                              .toIso8601String(),
+                                          endDate: endDate
+                                              .toUtc()
+                                              .toIso8601String(),
+                                          quantity: selectedNumber,
+                                          status: 1));
+                                } else {
+                                  Fluttertoast.showToast(
+                                      msg: "Please fill in all blank!",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.CENTER);
+                                }
                               },
                               child: const Text('Use!'),
                             ),

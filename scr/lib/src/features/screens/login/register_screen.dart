@@ -164,7 +164,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               setState(() {
                 obscureText = !obscureText;
               });
-              print(obscureText);},
+           },
             icon: const Icon(Icons.remove_red_eye_sharp),
           )),
     );

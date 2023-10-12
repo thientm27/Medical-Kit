@@ -21,3 +21,5 @@ const String news3 = 'assets/news/news3.png';
 const String news4 = 'assets/news/news4.png';
 
 const String backgroundImage = 'assets/medicine.jpg';
+
+const String allergic = 'assets/disease/Allergic.png';
